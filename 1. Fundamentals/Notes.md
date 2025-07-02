@@ -63,3 +63,5 @@ But to build a complete application, we need additional tools such as:
 - And more...
 
 The great thing about React is that it doesn't force us to use any specific tools for those needs. It doesn't include opinions or constraints about what other tools you should use. So, we have the freedom to choose the right tools for the job.
+
+# 2. Building Components

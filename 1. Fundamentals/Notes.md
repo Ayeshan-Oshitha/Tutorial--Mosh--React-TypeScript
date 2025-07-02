@@ -23,3 +23,43 @@ In React, whenever we create a function-based component, we need to follow Pasca
 In React, we use JSX or TSX. JSX stands for **JavaScript XML**. If we visit **babel.io/repl** and paste React code, it will show the equivalent plain JavaScript code.
 
 The great thing about JSX and TSX is that they allow us to create dynamic content using curly braces ({}) inside the markup.
+
+## How React Works
+
+Let’s imagine currently we have the below component tree of App and Message.
+
+When our application starts, React takes the component tree and builds a JavaScript data structure called the **Virtual DOM**. This Virtual DOM is different from the actual DOM in the browser. It's a lightweight, in-memory representation of the component tree, where each node represents a component and its properties.
+
+<img src="./images/image-1.png" width="400">
+
+When the _state_ or the _data_ of a component changes, React updates the corresponding node in the Virtual DOM to reflect the new state. Then it compares the current version of the Virtual DOM with the previous version to identify the nodes that should be updated. It will then update those nodes in the actual DOM.
+
+<img src="./images/image-2.png" width="400">
+
+Technically, updating the DOM is not done by React itself. It is done by a companion library called ReactDOM. ( In index.html, we have a `<div>` with an ID of root. This is the container of our application. Below that, we have a `<script>` element referencing `main.tsx`. Inside that file, it uses ReactDOM to render this component tree inside the element with the ID of root. )
+
+<img src="./images/image-3.jpg" width="700">
+
+So we are taking the component tree and rendering and displaying it inside an element with the ID of root. And to do that, we use the ReactDOM library. (But we can also render this component tree in a mobile app using another library called React Native.)
+
+So React itself is not tied to a particular platform like web or mobile. It's platform-agnostic, and we can use it to build apps for web, mobile, and desktop devices.
+
+## React Ecosystem
+
+React is a **library**, while Angular and Vue.js are **frameworks**.
+
+A **library** is a tool that provides specific functionality. A **framework** is a set of tools and guidelines for building applications. (So, a library is like a single tool, while a framework is like a toolset.)
+
+So, **React is just a library** or tool used for building user interfaces. The only thing it does—and does well—is create dynamic and interactive user interfaces.
+
+But to build a complete application, we need additional tools such as:
+
+- Routing
+- HTTP requests
+- State management
+- Internationalization - preparing your application to support multiple languages and regions
+- Form validation
+- Animations
+- And more...
+
+The great thing about React is that it doesn't force us to use any specific tools for those needs. It doesn't include opinions or constraints about what other tools you should use. So, we have the freedom to choose the right tools for the job.

@@ -85,7 +85,7 @@ We can handle events in two different ways.
   key={item}
   className="list-group-item"
   onClick={(e) => {
-    console.log(2);
+    console.log(e);
   }}
 >
   {item}
@@ -112,3 +112,15 @@ But if we use `onClick={handleClick()}`, then it will **call the function immedi
 React will take the **return value** of that function (usually `undefined`) and assign it to onClick, which is not what we want.
 
 We don't need to call the function at that time — we only need to **reference it**, so that when the user clicks it, the function will execute.
+
+## Managing State
+
+We can't use normal variables to update state, because those variables are **local to the component**. React is **not aware** of them. ( A normal variable is like a little secret inside the component — React doesn't know when it changes, so it won’t re-render. )
+
+To solve this, we need to **tell React** that our component has data (state) that changes over time. And to do that, we use useState.
+
+`useState` is a hook. A **hook** is just a **special function** that lets us **tap into React's built-in features**, like state, lifecycle, context, etc.
+
+**Note**: When we update the state, **React re-renders the component** automatically — that's how the UI stays in sync with the data/state.
+
+Important: Each component has its **own state**. ( For example, if you have two `ListGroup` components, the `selectedIndex` in one component can be `2`, while the `selectedIndex` in the other component can be `1`. They maintain **their states independently**.)

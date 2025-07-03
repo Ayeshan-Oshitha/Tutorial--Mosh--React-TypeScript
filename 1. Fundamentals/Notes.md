@@ -73,3 +73,42 @@ In **JSX**, the return statement can only include:
 - **Curly braces** `{}` for dynamic expressions (e.g., `{name}` or `{count + 1}`)
 
 You can't return regular JavaScript statements like `if`, `for`, or `console.log` directly inside JSX.
+
+## Handling Events
+
+We can handle events in two different ways.
+
+### 1.Inside onClick:
+
+```javascript
+<li
+  key={item}
+  className="list-group-item"
+  onClick={(e) => {
+    console.log(2);
+  }}
+>
+  {item}
+</li>
+```
+
+### 2. Using another function:
+
+```javascript
+const handleClick = (event: React.MouseEvent): void => {
+  console.log(event);
+};
+
+<li key={item} className="list-group-item" onClick={handleClick}>
+  {item}
+</li>;
+```
+
+Here, when the user clicks the list item, it will refer to the `handleClick` function and execute it.
+
+You're passing the **function reference**. React saves that function and calls it **only when the user clicks**. **It does not run immediately** when rendering.
+
+But if we use `onClick={handleClick()}`, then it will **call the function immediately** when rendering.
+React will take the **return value** of that function (usually `undefined`) and assign it to onClick, which is not what we want.
+
+We don't need to call the function at that time — we only need to **reference it**, so that when the user clicks it, the function will execute.

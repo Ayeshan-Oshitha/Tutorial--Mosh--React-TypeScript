@@ -125,6 +125,45 @@ To solve this, we need to **tell React** that our component has data (state) tha
 
 Important: Each component has its **own state**. ( For example, if you have two `ListGroup` components, the `selectedIndex` in one component can be `2`, while the `selectedIndex` in the other component can be `1`. They maintain **their states independently**.)
 
-## Passing data / Functions via Props
+## State vs Props
 
-Props are the inputs to our components
+<img src="./images/image-4.png" width="700">
+
+## Passing Children
+
+```javascript
+import Alert from "./components/Alert";
+
+function App() {
+  return (
+    <div>
+      <Alert>
+        <>
+          <h1>Hello World</h1>
+          <p>This is a hello world text</p>
+        </>
+      </Alert>
+    </div>
+  );
+}
+
+export default App;
+```
+
+```javascript
+import type { ReactNode } from "react";
+
+interface Props {
+  children: ReactNode;
+}
+
+const Alert = ({ children }: Props) => {
+  return (
+    <>
+      <div className="alert alert-primary">{children}</div>
+    </>
+  );
+};
+
+export default Alert;
+```

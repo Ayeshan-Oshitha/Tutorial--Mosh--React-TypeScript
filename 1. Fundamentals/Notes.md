@@ -78,7 +78,7 @@ You can't return regular JavaScript statements like `if`, `for`, or `console.log
 
 We can handle events in two different ways.
 
-### 1.Inside onClick:
+#### 1.Inside onClick:
 
 ```javascript
 <li
@@ -92,7 +92,7 @@ We can handle events in two different ways.
 </li>
 ```
 
-### 2. Using another function:
+#### 2. Using another function:
 
 ```javascript
 const handleClick = (event: React.MouseEvent): void => {
@@ -124,3 +124,7 @@ To solve this, we need to **tell React** that our component has data (state) tha
 **Note**: When we update the state, **React re-renders the component** automatically — that's how the UI stays in sync with the data/state.
 
 Important: Each component has its **own state**. ( For example, if you have two `ListGroup` components, the `selectedIndex` in one component can be `2`, while the `selectedIndex` in the other component can be `1`. They maintain **their states independently**.)
+
+## Passing data / Functions via Props
+
+Props are the inputs to our components

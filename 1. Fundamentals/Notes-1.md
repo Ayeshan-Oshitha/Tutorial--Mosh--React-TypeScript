@@ -204,3 +204,14 @@ CSS Modules limit the scope of class names to local files (just like JavaScript 
 ```javascript
 <p className={[styles.highlightedText, styles.title].join(" ")}>
 ```
+
+## CSS-in-JS
+
+CSS-in-JS means writing CSS styles directly inside JavaScript files, often using libraries like `styled-components`, `emotion` or `polished`.
+
+#### Benifits
+
+- Scoped Styles
+- All the CSS & JS/TS code in one place
+- Easier to delete a component
+- Easier to style based on props/state

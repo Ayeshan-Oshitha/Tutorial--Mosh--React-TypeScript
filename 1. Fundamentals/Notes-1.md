@@ -229,3 +229,21 @@ With separation of concerns, our program becomes easier to understand, maintain,
 In inline styles, the class names are a bit different. Instead of using dash-case naming, they use camelCase naming.
 
 Try to avoid using inline styles as much as possible.
+
+## Popular UI Libraries
+
+- **Bootstrap** – A widely used CSS framework with prebuilt components and responsive grid system
+
+- **Material UI (MUI)** – Implements Google’s Material Design; a popular React component library
+
+- **Tailwind CSS** – A utility-first CSS framework for rapidly building custom designs
+
+- **DaisyUI** – A component library built on top of Tailwind CSS; similar in style to Bootstrap
+
+- **Chakra UI** – A modular and accessible React component library; similar to MUI, but built with a focus on simplicity and flexibility; also works well with Tailwind CSS
+
+## Adding Icons
+
+You can use the **React Icons library**, which is a package that combines many different icon libraries like Font Awesome, Bootstrap Icons, Material Design Icons, and more — all in one easy-to-use React component library.
+
+React Icons have properties like _color_, _size_, and more to easily customize their appearance. You can also apply custom styles using CSS classes or inline styles for more flexibility.

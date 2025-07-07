@@ -190,3 +190,17 @@ Now, when we create a folder for each component, the import statement may look u
 So we can use an `index.ts` file in each folder and use **re-export**. This way, when importing that file, we can just import the `group/folder name`.
 
 When we don’t provide a specific file name, the compiler will automatically look for the `index.ts` file.
+
+## CSS Modules
+
+The problem with vanilla CSS is that it can run into clashes. If we use the same style name in multiple places, the CSS will conflict and become hard to debug. We can resolve this using **CSS Modules**.
+
+CSS Modules limit the scope of class names to local files (just like JavaScript modules). So we can use the same CSS class name in different files without worrying about conflicts. When we import a CSS module, it returns a **JavaScript object** that contains all the class names defined in that CSS file. Each CSS class is a **property of that object**.
+
+**Note** – If our CSS class name has a dash (`-`), then we can’t access it using dot notation. We should use bracket notation. So most of the time, when working with CSS modules, we use **camelCase** for class names.
+
+**Extra** – If we need to use multiple CSS classes, we can use an array and the join() method.
+
+```javascript
+<p className={[styles.highlightedText, styles.title].join(" ")}>
+```

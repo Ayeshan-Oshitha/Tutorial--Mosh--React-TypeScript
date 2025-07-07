@@ -167,3 +167,26 @@ const Alert = ({ children }: Props) => {
 
 export default Alert;
 ```
+
+# 3. Styling Components
+
+- Vanilla CSS
+- CSS modules
+- CSS-in-JS
+- Using CSS Libraries
+
+## Vanilla CSS
+
+The best way to add CSS files is near the component file.
+
+It’s okay to add SCSS files in a separate folder like `styles`, but it breaks some rules of cohesion – (Things that are related should be located near each other).
+
+So, we can create a folder for the component and add both the component file (`.tsx`) and the CSS file inside that folder.
+
+#### Extra -:
+
+Now, when we create a folder for each component, the import statement may look uglier.
+
+So we can use an `index.ts` file in each folder and use **re-export**. This way, when importing that file, we can just import the `group/folder name`.
+
+When we don’t provide a specific file name, the compiler will automatically look for the `index.ts` file.

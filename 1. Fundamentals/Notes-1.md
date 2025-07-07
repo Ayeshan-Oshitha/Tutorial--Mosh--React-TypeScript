@@ -215,3 +215,17 @@ CSS-in-JS means writing CSS styles directly inside JavaScript files, often using
 - All the CSS & JS/TS code in one place
 - Easier to delete a component
 - Easier to style based on props/state
+
+## Seperation of Concerns
+
+Divide a program into distinct sections where each section handles a specific functionality, rather than having everything in one place.
+
+With separation of concerns, our program becomes easier to understand, maintain, and modify. Thanks to modularity, we can build and test these modules individually and even reuse them in other programs.
+
+**CSS-in-JS** doesn’t violate the principle of separation of concerns. Separation of concerns doesn’t mean everything must be in separate files—it simply emphasizes that different sections or modules in a program should handle specific responsibilities or functionalities.
+
+## Inline Styles
+
+In inline styles, the class names are a bit different. Instead of using dash-case naming, they use camelCase naming.
+
+Try to avoid using inline styles as much as possible.

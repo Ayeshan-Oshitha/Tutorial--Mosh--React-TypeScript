@@ -387,6 +387,8 @@ function App() {
 export default App;
 ```
 
+---
+
 ## Updating Nested Objects
 
 When we are updating a nested object, we should **create a new copy of each level we want to update**,
@@ -402,6 +404,7 @@ function App() {
       city: "San Francisco",
       zipcode: 94111,
     },
+    age: 25,
   });
 
   const handleClick = () => {
@@ -424,9 +427,62 @@ export default App;
 
 In the example above:
 
-- `customer` has a nested `address` object.
+- `customer` has a nested `address` object. So `...customer` creates a **shallow copy** of the customer object.
 
-- When updating only the `zipcode`, we must **also copy the** `address` **object** using `{ ...customer.address }`
-  so that we don’t mutate the original one.
+- This means the **top-level properties** (`name`, `age`) are copied.
+
+- BUT: the `address` object is still the same reference as before.
+
+- When updating the `zipcode`, we must **also copy the** `address` **object** using `{ ...customer.address }`
+  so that we don’t mutate the **original one**.
 
 - This ensures **React detects the change correctly** and triggers a re-render.
+
+## Updating the Arrays
+
+In React, you should never change (mutate) the original array directly. Instead, always create a brand new array and update the state with that.
+
+```javascript
+function App() {
+  const [tags, setTags] = useState(["happy", "cheerful"]);
+
+  const handleClick = () => {
+    // Add
+    setTags([...tags, "exciting"]);
+
+    // Remove
+    setTags(tags.filter((tag) => tag !== "happy"));
+
+    // Update
+    setTags(tags.map((tag) => (tag === "happy" ? "happiness" : tag)));
+  };
+
+  return (
+    <div>
+      <button onClick={handleClick}>Click Me</button>
+    </div>
+  );
+}
+```
+
+Add, Update and Remove Operations for Objects
+
+```javascript
+const [person, setPerson] = useState({
+  name: "John",
+  age: 25,
+});
+
+const handleAdd = () => {
+  setPerson({ ...person, city: "New York" }); // Adds 'city'
+};
+
+const handleRemove = () => {
+  const { age, ...rest } = person;
+  setPerson(rest); // Removes 'age'
+};
+
+const handleUpdate = () => {
+  setPerson({ ...person, name: "Jane" }); // Updates 'name'
+};
+```

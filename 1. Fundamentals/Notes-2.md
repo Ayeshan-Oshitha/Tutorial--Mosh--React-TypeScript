@@ -427,7 +427,7 @@ export default App;
 
 In the example above:
 
-- `customer` has a nested `address` object. So `...customer` creates a **shallow copy** of the customer object.
+- `customer` has a nested `address` object. So `...customer` creates a **shallow copy**(only the first level is copied) of the customer object.
 
 - This means the **top-level properties** (`name`, `age`) are copied.
 
@@ -552,6 +552,49 @@ Imagine the **parent component** is `App`, and the child components are `Navbar`
 
 Since the state (number of items) currently lives inside `ShoppingCart`, we **lift the state up** to the `App` component. This way, both `Navbar` and `ShoppingCart` can access the same state via props.
 
+```javascript
+// App Component
+function App() {
+  const [CartItems, setCartItems] = useState(["Product 1", "Product 2"]);
+
+  return (
+    <div>
+      <NavBar cardItemsCount={CartItems.length} />
+      <Cart cartItems={CartItems} onClear={() => setCartItems([])} />
+    </div>
+  );
+}
+
+// NavBar Component
+const NavBar = ({ cardItemsCount }: Props) => {
+  return (
+    <>
+      <div>NavBar</div>
+      <p>{cardItemsCount}</p>
+    </>
+  );
+};
+
+// Cart Component
+interface Props {
+  cartItems: string[];
+  onClear: () => void;
+}
+const Cart = ({ cartItems, onClear }: Props) => {
+  return (
+    <>
+      <div>Cart</div>
+      <ul>
+        {cartItems.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+      <button onClick={onClear}>Clear</button>
+    </>
+  );
+};
+```
+
 #### `Important`:
 
-The component that **owns the state** (here, App) should be responsible for **changing** the state. So only the `App` component should update the state, while `Navbar` and `ShoppingCart` just use the state passed down to them.
+The component that **owns the state** (here, `App`) should be responsible for **changing** the state. So only the `App` component should update the state, while `Navbar` and `ShoppingCart` just use the state passed down to them.

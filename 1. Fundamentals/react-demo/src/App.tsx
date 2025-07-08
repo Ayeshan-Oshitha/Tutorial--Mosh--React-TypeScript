@@ -1,24 +1,24 @@
 import { useState } from "react";
 
 function App() {
-  const [drink, setDrink] = useState({
-    title: "Americano",
-    price: 5,
+  const [customer, setCustomer] = useState({
+    name: "John",
+    address: {
+      city: "San Francisco",
+      zipcode: 94111,
+    },
   });
 
   const handleClick = () => {
-    // const newDrink = {
-    //  ...drink - Spread Operator, Copy all other Properties
-    //   price: 6,
-    // };
-    // setDrink(newDrink);
-
-    setDrink({ ...drink, price: 6 });
+    setCustomer({
+      ...customer,
+      address: { ...customer.address, zipcode: 94222 },
+    });
   };
 
   return (
     <div>
-      {drink.price}
+      {customer.address.zipcode}
       <button onClick={handleClick}>Click Me</button>
     </div>
   );

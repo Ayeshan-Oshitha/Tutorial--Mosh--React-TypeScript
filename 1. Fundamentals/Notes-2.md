@@ -509,3 +509,37 @@ unction App() {
   );
 }
 ```
+
+## Simplifying update Logic with Immer
+
+Normally, when updating arrays or objects in React state, you **should never mutate the original data** directly. Instead, you create a new copy with the changes. This can get complicated and verbose.
+
+With Immer, you can write code that looks like you are mutating the data, but Immer automatically produces an immutable updated copy behind the scenes
+
+```javascript
+function App() {
+  const [bugs, setBugs] = useState([
+    { id: 1, title: "Bug 1", fixed: false },
+    { id: 2, title: "Bug 2", fixed: false },
+  ]);
+
+  const handleClick = () => {
+    setBugs(
+      produce((draft) => {
+        const bug = draft.find((bug) => bug.id === 1);
+        if (bug) {
+          bug.fixed = true;
+        }
+      })
+    );
+  };
+
+  return (
+    <div>
+      <button onClick={handleClick}>Click Me</button>
+    </div>
+  );
+}
+```
+
+draft is a **temporary mutable copy** of the state created by Immer. ( In Here, draft is actually the temporary mutable copy of the whole `bugs array`, )

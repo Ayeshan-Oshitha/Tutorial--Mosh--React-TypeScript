@@ -543,3 +543,15 @@ function App() {
 ```
 
 draft is a **temporary mutable copy** of the state created by Immer. ( In Here, draft is actually the temporary mutable copy of the whole `bugs array`, )
+
+## Sharing State between Components
+
+When we need to share state between components, we use a technique called **lifting state up**.
+
+Imagine the **parent component** is `App`, and the child components are `Navbar` and `ShoppingCart`. The number of items in the shopping cart should be displayed in the `Navbar`.
+
+Since the state (number of items) currently lives inside `ShoppingCart`, we **lift the state up** to the `App` component. This way, both `Navbar` and `ShoppingCart` can access the same state via props.
+
+#### `Important`:
+
+The component that **owns the state** (here, App) should be responsible for **changing** the state. So only the `App` component should update the state, while `Navbar` and `ShoppingCart` just use the state passed down to them.

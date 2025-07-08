@@ -465,7 +465,7 @@ function App() {
 }
 ```
 
-Add, Update and Remove Operations for Objects
+#### Add, Update and Remove Operations for Objects
 
 ```javascript
 const [person, setPerson] = useState({
@@ -485,4 +485,27 @@ const handleRemove = () => {
 const handleUpdate = () => {
   setPerson({ ...person, name: "Jane" }); // Updates 'name'
 };
+```
+
+## Updating Array of Objects
+
+When updating an object inside an array in React, you don’t need to copy every object—just create a new array and make a new copy of the object you’re updating, while keeping the other objects unchanged.
+
+```javascript
+unction App() {
+  const [bugs, setBugs] = useState([
+    { id: 1, title: "Bug 1", fixed: false },
+    { id: 2, title: "Bug 2", fixed: false },
+  ]);
+
+  const handleClick = () => {
+    setBugs(bugs.map((bug) => (bug.id === 1 ? { ...bug, fixed: true } : bug)));
+  };
+
+  return (
+    <div>
+      <button onClick={handleClick}>Click Me</button>
+    </div>
+  );
+}
 ```

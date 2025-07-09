@@ -598,3 +598,31 @@ const Cart = ({ cartItems, onClear }: Props) => {
 #### `Important`:
 
 The component that **owns the state** (here, `App`) should be responsible for **changing** the state. So only the `App` component should update the state, while `Navbar` and `ShoppingCart` just use the state passed down to them.
+
+---
+
+When updating arrays or objects in React state, it's best to use the previous state (using the functional update form). This ensures you're always working with the latest version of the state, especially when multiple updates happen quickly.
+
+If you don’t use the previous state, you might accidentally overwrite recent changes with stale data.
+
+```javascript
+// Safe
+setCount((prevCount) => prevCount + 1);
+
+// Safe
+setItems((prevItems) => [...prevItems, newItem]);
+```
+
+```javascript
+// Unsafe if called multiple times quickly
+setPerson({
+  ...person,
+  [name]: value,
+});
+
+// Safe — always uses latest value
+setPerson((prev) => ({
+  ...prev,
+  [name]: value,
+}));
+```

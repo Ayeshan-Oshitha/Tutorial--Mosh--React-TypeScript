@@ -83,3 +83,11 @@ For input elements, since they have a `value` property, we can use `ref.current.
 Instead of using `useRef` to get form values, we can use `useState`. With useState, the input updates state on every `onChange`, causing the component to re-render. This usually doesn’t cause performance issues.
 
 All HTML inputs have a built-in `value` property to manage their own state. But when we also use React state, the input’s internal value and React state can get out of sync. To fix this, we make React the single source of truth by setting the input’s `value` to the React state. This keeps the input value always in sync with React Because React controls the input value through state, this is called a **controlled component**. The input’s value is managed by React, not the DOM.
+
+# Managing Forms with React Hook Form
+
+When using **useState** in React, we usually need to set two attributes on each input: `value` and `onChange`.
+
+However, with an external library like **React Hook Form**, we can simplify form handling.
+
+React Hook Form provides built-in properties and functions that help us **control form state more efficiently**.

@@ -25,7 +25,7 @@ Then, when clicking the button, the button will automatically trigger the form's
 
 **Note**: Inside a Form, if we don't specifically set the button `type`, the browser will treat it as `type="submit"`.
 
-```
+```javascript
 const handleSubmit = (event: React.FormEvent) => {
   event?.preventDefault();
   console.log("Form Submitted");
@@ -57,3 +57,23 @@ then the following will happen when the button is clicked:
 2. Then, if the onClick handler does not have event.preventDefault() or event.stopPropagation(), the form's onSubmit handler will also be triggered.
 
 3. But, if event.preventDefault() is called inside the onClick handler, it will stop calling the onSubmit handler.
+
+# Accessing Input Fields
+
+The `useRef` hook in React is used to reference DOM elements directly. You can assign it to elements like buttons, headings, lists, or input fields.
+
+After the component mounts(renders), `ref.current` will point to the actual DOM element. By using console.log(ref.current), we can directly see and interact with the real DOM element.
+
+For input elements, since they have a `value` property, we can use `ref.current.value` to read the current value entered by the user.
+
+### Why do we initialize `useRef` with `null`?
+
+- The `current` property of a ref is meant to reference a DOM node. When we create a ref using `useRef(null)`, the initial value we pass (`null`) is used to set the `current` property.
+
+- At the time of ref creation, we don’t yet have access to the actual DOM node — because the DOM is only created **after React renders** the component. So, we really have no meaningful initial value to provide.
+
+- Once React finishes rendering and attaches the ref to the DOM element, it automatically sets `ref.current` to point to that DOM node. Later, if the DOM element is removed from the screen (i.e., unmounted), React sets `ref.current` back to `null`.
+
+- That’s why we initialize the ref with `null`: because initially there's no DOM element to reference.
+
+**Important** - In React, updating the `.current` property of a `useRef` does **not cause the component to re-render**, unlike `useState`, which does.

@@ -97,3 +97,17 @@ React Hook Form provides built-in properties and functions that help us **contro
 With **React Hook Form**, we can easily apply basic HTML validations (like `required`, `minLength`, etc.).
 
 React Hook Form will **only submit the form if all validations pass**. If the form is invalid, submission will be blocked automatically.
+
+# Schema based Validations
+
+When we use regular (inline) validations(basic HTML Validations), the rules can become scattered throughout the code. With **schema-based validation**, we can bring **all form validation logic into one centralized place**.
+
+There are several third-party libraries that support schema-based validation, such as:
+
+- Joi
+- Yup
+- Zod
+
+A **key advantage** of **Zod** is that it allows us to **generate TypeScript types directly from the schema**, so we don’t need to define a separate interface.
+
+After defining the schema, we can integrate it with **React Hook Form** using the `@hookform/resolvers` package. This package provides resolvers for different validation libraries like Zod, Joi, and Yup.

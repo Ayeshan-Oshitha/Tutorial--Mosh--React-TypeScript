@@ -91,3 +91,9 @@ When using **useState** in React, we usually need to set two attributes on each 
 However, with an external library like **React Hook Form**, we can simplify form handling.
 
 React Hook Form provides built-in properties and functions that help us **control form state more efficiently**.
+
+# Applying Validations
+
+With **React Hook Form**, we can easily apply basic HTML validations (like `required`, `minLength`, etc.).
+
+React Hook Form will **only submit the form if all validations pass**. If the form is invalid, submission will be blocked automatically.

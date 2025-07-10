@@ -54,7 +54,7 @@ function App() {
     if (inputRef.current) {
       inputRef.current.focus();
     }
-  });
+  }, []);
 
   return (
     <div>
@@ -71,3 +71,56 @@ export default App;
 - The side effect (focusing the input) happens safely afterward.
 
 Note - You **cannot call** `useEffect` conditionally or inside loops — it must be called **at the top level** of your component.
+
+## Effect Dependencies
+
+```javascript
+useEffect(() => {
+  console.log("Fetching Products");
+  setProducts(["Clothing", "HouseHold"]);
+});
+```
+
+In the above code, this **runs infinitely** because when we don’t have a dependency array, the **effect runs after every render**. So it runs after the initial render, then `setProducts` updates the state, which causes the component to render again, and then the effect runs again. This cycle repeats indefinitely, causing the effect to run infinitely.
+
+```javascript
+useEffect(() => {
+  console.log("Fetching Products");
+  setProducts(["Clothing", "HouseHold"]);
+}, []);
+```
+
+In the above code, the `useEffect` will only run on the **initial render** because the dependency array is empty. That means the effect runs only once when the component mounts and **does not run again** on re-renders.
+
+```javascript
+// App Component
+function App() {
+  const [category, setCategory] = useState("");
+
+  return (
+    <div>
+      <select
+        className="form-select"
+        onChange={(e) => setCategory(e.target.value)}
+      >
+        <option value=""></option>
+        <option value="Clothing">Clothing</option>
+        <option value="HouseHold">HouseHold</option>
+      </select>
+      <ProductList category={category} />
+    </div>
+  );
+}
+
+// ProductList
+const ProductList = ({ category }: { category: string }) => {
+  useEffect(() => {
+    console.log("Fetching Products", category);
+  }, [category]);
+  return <div>{category}</div>;
+};
+```
+
+In the above code, when the value of the dependency (`category`) changes, the `useEffect` runs again.
+
+This is because we passed `[category]` as the dependency array to the `useEffect`, so every time the category value updates (for example, when the user selects a different option), the effect gets triggered again.

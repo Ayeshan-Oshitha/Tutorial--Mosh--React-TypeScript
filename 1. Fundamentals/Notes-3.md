@@ -1,4 +1,6 @@
-# Handling a Form Submission
+# 5. Building Forms
+
+## Handling a Form Submission
 
 By default, when we submit a form, the form is posted to the server, which causes a full page reload. To solve this, we should **stop this default behavior** by using `preventDefault()`. With this, we can prevent the form from being posted to the server.
 
@@ -58,7 +60,7 @@ then the following will happen when the button is clicked:
 
 3. But, if event.preventDefault() is called inside the onClick handler, it will stop calling the onSubmit handler.
 
-# Accessing Input Fields
+## Accessing Input Fields
 
 The `useRef` hook in React is used to reference DOM elements directly. You can assign it to elements like buttons, headings, lists, or input fields.
 
@@ -78,13 +80,13 @@ For input elements, since they have a `value` property, we can use `ref.current.
 
 **Important** - In React, updating the `.current` property of a `useRef` does **not cause the component to re-render**, unlike `useState`, which does.
 
-# Controlled Components
+## Controlled Components
 
 Instead of using `useRef` to get form values, we can use `useState`. With useState, the input updates state on every `onChange`, causing the component to re-render. This usually doesn’t cause performance issues.
 
 All HTML inputs have a built-in `value` property to manage their own state. But when we also use React state, the input’s internal value and React state can get out of sync. To fix this, we make React the single source of truth by setting the input’s `value` to the React state. This keeps the input value always in sync with React Because React controls the input value through state, this is called a **controlled component**. The input’s value is managed by React, not the DOM.
 
-# Managing Forms with React Hook Form
+## Managing Forms with React Hook Form
 
 When using **useState** in React, we usually need to set two attributes on each input: `value` and `onChange`.
 
@@ -92,13 +94,13 @@ However, with an external library like **React Hook Form**, we can simplify form
 
 React Hook Form provides built-in properties and functions that help us **control form state more efficiently**.
 
-# Applying Validations
+## Applying Validations
 
 With **React Hook Form**, we can easily apply basic HTML validations (like `required`, `minLength`, etc.).
 
 React Hook Form will **only submit the form if all validations pass**. If the form is invalid, submission will be blocked automatically.
 
-# Schema based Validations
+## Schema based Validations
 
 When we use regular (inline) validations(basic HTML Validations), the rules can become scattered throughout the code. With **schema-based validation**, we can bring **all form validation logic into one centralized place**.
 

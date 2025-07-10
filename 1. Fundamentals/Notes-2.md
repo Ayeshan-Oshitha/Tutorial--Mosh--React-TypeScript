@@ -322,7 +322,7 @@ Message : 1
 
 ✅ Pure component — it is totally okay to update an object that we **create as part of rendering**.
 
-Now the `count` variable is **part of the render phase**, so it’s okay to update it.
+Now the `count` variable is **part of the render phase(Inside the App Component)**, so it’s okay to update it.
 
 ## Understanding the Strict Mode
 

@@ -57,8 +57,26 @@ function App() {
 
     // demonstration link only
     axios
-      .post(`https://jsonplaceholder.typicode.com/users/` + newUser.id) // In this url, when send a post object, Instead of ID 0, It will return new id - fake backend only
+      .post(`https://jsonplaceholder.typicode.com/users/` + newUser.id, newUser) // In this url, when send a post object, Instead of ID 0, It will return new id - fake backend only
       .then(({ data: savedUser }) => setUsers([savedUser, ...users]))
+      .catch((err) => {
+        setError(err.message);
+        setUsers(originalUsers);
+      });
+  };
+
+  const updateUser = (user: User) => {
+    // Optimistic Update
+    const originalUsers = [...users];
+
+    const updatedUser = { ...user, name: user.name + "  !!!!!" };
+    setUsers(users.map((u) => (u.id === user.id ? updatedUser : u)));
+
+    axios
+      .patch(
+        `https://jsonplaceholder.typicode.com/users/` + user.id,
+        updatedUser
+      )
       .catch((err) => {
         setError(err.message);
         setUsers(originalUsers);
@@ -79,12 +97,20 @@ function App() {
             className="list-group-item d-flex justify-content-between"
           >
             {user.name}
-            <button
-              className="btn btn-outline-danger"
-              onClick={() => deleteUser(user)}
-            >
-              Delete
-            </button>
+            <div>
+              <button
+                className="btn btn-outline-secondary mx-2"
+                onClick={() => updateUser(user)}
+              >
+                Update
+              </button>
+              <button
+                className="btn btn-outline-danger"
+                onClick={() => deleteUser(user)}
+              >
+                Delete
+              </button>
+            </div>
           </li>
         ))}
       </ul>

@@ -271,6 +271,6 @@ Whether you're using **Promises** or **async/await**, if you're setting a `loadi
 
 **Async/await** – In here, since `await` is used and we write the code inside an `async` function, as soon as the controller sees the loader, it will **stop execution** of the function. But if it returns an error, it will* never go to the line below loader lines* , and the loader will **stay forever**.
 
-## Deleting Data
+## Deleting / Creating / Updating Data
 
 <img src="./images/image-6.png" width="700">

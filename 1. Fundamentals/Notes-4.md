@@ -159,3 +159,11 @@ Every HTTP request has two main parts:
 - **Headers**: These contain metadata such as content type, authentication info, and more.
 
 - **Body**: This contains the actual data being sent.
+
+## Working with Async and Await
+
+We can write promises in a more linear way using `async` and `await`.
+
+If the promise is **resolved**, we can get the **response object**, or if the promise is **rejected**, we can get the **error**. (For now, we can use `.then()` to get the response object and `.catch()` to get the error.)
+
+In async/await we can also use `await` to get the response object, and by using a `try...catch` block, we can catch the error.

@@ -124,3 +124,18 @@ const ProductList = ({ category }: { category: string }) => {
 In the above code, when the value of the dependency (`category`) changes, the `useEffect` runs again.
 
 This is because we passed `[category]` as the dependency array to the `useEffect`, so every time the category value updates (for example, when the user selects a different option), the effect gets triggered again.
+
+## Effect Clean Up
+
+Sometimes, the code we pass to the `useEffect` hook needs to be **cleaned up**. To provide cleanup code, we **return a function** from the effect. This function is used to **disconnect or unsubscribe** from whatever the effect was doing.
+
+Generally, our **cleanup function** should **stop or undo** whatever the effect was doing. For example:
+
+- If we are **connecting** to something or _subscribing_, the cleanup function should unsubscribe or call `disconnect()`.
+- If we are showing a **modal**, the cleanup function should **hide the modal**.
+- If our effect is **fetching data**, the cleanup function should **abort the fetch** or **ignore the result** if it's no longer needed.
+
+The **cleanup function** will execute when:
+
+- The component is **unmounted** (when the component remove from teh screen), or
+- Before the effect runs again (if dependencies have changed)

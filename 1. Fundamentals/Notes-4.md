@@ -139,3 +139,9 @@ The **cleanup function** will execute when:
 
 - The component is **unmounted** (when the component remove from teh screen), or
 - Before the effect runs again (if dependencies have changed)
+
+## Fetching Data
+
+To fetch data, we can use `fetch` or `Axios`.
+
+When calling a server, we have to wait for the response. It may take half a second or more. So, it returns a **Promise**. A **Promise** is an object that holds the eventual **result** or **failure** of an asynchronous operation. (**Asynchronous** means the operation takes some time to complete, like a long-running task.)

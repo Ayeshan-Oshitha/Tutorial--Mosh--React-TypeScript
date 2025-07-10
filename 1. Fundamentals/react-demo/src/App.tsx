@@ -40,8 +40,25 @@ function App() {
     const originalUsers = [...users];
     setUsers(users.filter((u) => u.id !== user.id));
 
+    // demonstration link only
     axios
       .delete(`https://jsonplaceholder.typicode.com/users/` + user.id)
+      .catch((err) => {
+        setError(err.message);
+        setUsers(originalUsers);
+      });
+  };
+
+  const addUser = () => {
+    // Optimistic Update
+    const originalUsers = [...users];
+    const newUser = { id: 0, name: "Mosh" };
+    setUsers([newUser, ...users]);
+
+    // demonstration link only
+    axios
+      .post(`https://jsonplaceholder.typicode.com/users/` + newUser.id) // In this url, when send a post object, Instead of ID 0, It will return new id - fake backend only
+      .then(({ data: savedUser }) => setUsers([savedUser, ...users]))
       .catch((err) => {
         setError(err.message);
         setUsers(originalUsers);
@@ -52,6 +69,9 @@ function App() {
     <div>
       {error && <p className="text-danger"></p>}
       {isLoading && <div className="spinner-border"></div>}
+      <button className="btn btn-primary mb-3" onClick={addUser}>
+        Add User
+      </button>
       <ul className="list-group">
         {users.map((user) => (
           <li

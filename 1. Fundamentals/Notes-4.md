@@ -167,3 +167,98 @@ We can write promises in a more linear way using `async` and `await`.
 If the promise is **resolved**, we can get the **response object**, or if the promise is **rejected**, we can get the **error**. (For now, we can use `.then()` to get the response object and `.catch()` to get the error.)
 
 In async/await we can also use `await` to get the response object, and by using a `try...catch` block, we can catch the error.
+
+## Cancelling a fetch Request
+
+When we send an HTTP request in a React component (usually inside a useEffect), it's important to also handle cleanup. If the user navigates away from the page before the request completes, we don’t want to continue processing or rendering the returned data. This can lead to memory leaks or unexpected behavior.
+
+As a best practice, whenever you fetch data in a useEffect, you should provide a cleanup function to cancel the request if it's no longer needed.
+
+To do this, we can use the built-in AbortController class available in modern browsers. AbortController allows us to abort operations like fetch requests, DOM Manipulation or any operations that might take long to xomplete. This is useful for stopping long-running tasks if the component unmounts or if the request is no longer relevant.
+
+#### Example OF Promises
+
+```javascript
+  useEffect(() => {
+    const controller = new AbortController();
+
+    axios
+      .get<User[]>("https://jsonplaceholder.typicode.com/users", {
+        signal: controller.signal,
+      })
+      .then((res) => setUsers(res.data))
+      .catch((err) => {
+        if (err instanceof CanceledError) {
+          return;
+        }
+        setError(err.message);
+      });
+
+    return () => controller.abort();
+  }, []);
+```
+
+#### Example OF Async/Await
+
+```javascript
+useEffect(() => {
+  const controller = new AbortController();
+
+  const fetchUsers = async () => {
+    try {
+      const res = await axios.get<User[]>(
+        "https://jsonplaceholder.typicode.com/users",
+        { signal: controller.signal }
+      );
+      setUsers(res.data);
+    } catch (error) {
+      if (axios.isCancel(error)) {
+        // Request was cancelled
+        return;
+      }
+      setError((error as AxiosError).message);
+    }
+  };
+
+  fetchUsers();
+
+  return () => {
+    controller.abort(); // Cancel the request on cleanup
+  };
+}, []);
+```
+
+In the above example, we use AbortController for cleanup.
+
+But this doesn't cancel the **previous request** automatically (for example, if the network is slow and multiple requests are triggered, you might end up receiving the response from an older request instead of the latest one).
+
+To handle that, we can either use AbortController with a global variable, or — the cleaner method — is to use a `ref`.
+
+```javascript
+const controllerRef = useRef<AbortController | null>(null);
+
+useEffect(() => {
+  if (controllerRef.current) {
+    controllerRef.current.abort(); // Cancel previous request
+  }
+
+  const controller = new AbortController();
+  controllerRef.current = controller;
+
+  axios
+    .get<User[]>("https://jsonplaceholder.typicode.com/users", {
+      signal: controller.signal,
+    })
+    .then((res) => setUsers(res.data))
+    .catch((err) => {
+      if (axios.isCancel(err)) {
+        console.log("Request canceled");
+        return;
+      }
+      setError(err.message);
+    });
+
+  return () => controller.abort(); // Cleanup on unmount
+}, []);
+
+```

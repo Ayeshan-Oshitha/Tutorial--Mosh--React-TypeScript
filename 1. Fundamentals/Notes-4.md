@@ -262,3 +262,11 @@ useEffect(() => {
 }, []);
 
 ```
+
+## Loading the indicator
+
+Whether you're using **Promises** or **async/await**, if you're setting a `loading` flag (e.g., `setLoading(true)` before a request), you **should always reset it** (`setLoading(false)`) in a **finally** block
+
+**Promises** – If we use `loader` without a `finally` block, before resolving the promise, it will move to the `loading` flag line (the loader disappears too early).
+
+**Async/await** – In here, since `await` is used and we write the code inside an `async` function, as soon as the controller sees the loader, it will **stop execution** of the function. But if it returns an error, it will* never go to the line below loader lines* , and the loader will **stay forever**.

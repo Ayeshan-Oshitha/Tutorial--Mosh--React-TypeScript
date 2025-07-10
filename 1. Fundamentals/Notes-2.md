@@ -350,8 +350,9 @@ So, when Strict Mode is enabled, in development, React renders each component tw
 
 - The **second render** is used to actually update the user interface.
 
-From React 18, Strict Mode is enabled by default. Strict Mode behaves this way only in development mode, so when we build our application for production,
-the Strict Mode checks are not included and components are rendered only once.
+From React 18, Strict Mode is enabled by default. Strict Mode behaves this way only in development mode, so when we build our application for production, the Strict Mode checks are not included and components are rendered only once.
+
+**Note** - This double render happens only for the initial mount of a component (not on updates). It does not happen again on subsequent re-renders caused by state or prop changes
 
 ## Updating Objects
 

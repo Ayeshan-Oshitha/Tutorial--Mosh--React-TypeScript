@@ -145,3 +145,17 @@ The **cleanup function** will execute when:
 To fetch data, we can use `fetch` or `Axios`.
 
 When calling a server, we have to wait for the response. It may take half a second or more. So, it returns a **Promise**. A **Promise** is an object that holds the eventual **result** or **failure** of an asynchronous operation. (**Asynchronous** means the operation takes some time to complete, like a long-running task.)
+
+## Understanding HTTP Requests
+
+When we call a GET method, Axios sends an HTTP request to the server.
+
+HTTP stands for **HyperText Transfer Protocol**. It is the protocol used for transferring data over the internet — essentially, it's what powers the web.
+
+When we visit a website, our browser sends an HTTP request to the website’s server, asking for some content. The server then responds with data that usually includes HTML, CSS, JavaScript, and other resources needed to display the website in our browser.
+
+Every HTTP request has two main parts:
+
+- **Headers**: These contain metadata such as content type, authentication info, and more.
+
+- **Body**: This contains the actual data being sent.

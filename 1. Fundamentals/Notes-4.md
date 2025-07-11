@@ -274,3 +274,7 @@ Whether you're using **Promises** or **async/await**, if you're setting a `loadi
 ## Deleting / Creating / Updating Data
 
 <img src="./images/image-6.png" width="700">
+
+## Extracting the User Service
+
+Refer the async/await return note in Excalidraw

@@ -278,3 +278,9 @@ Whether you're using **Promises** or **async/await**, if you're setting a `loadi
 ## Extracting the User Service
 
 Refer the async/await return note in Excalidraw
+
+## Creating a custom data fetching Hook
+
+Custom Hooks can be used to share functionality across different components
+
+A hook is just a function

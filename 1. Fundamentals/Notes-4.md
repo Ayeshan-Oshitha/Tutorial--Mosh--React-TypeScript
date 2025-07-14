@@ -283,4 +283,6 @@ Refer the async/await return note in Excalidraw
 
 Custom Hooks can be used to share functionality across different components
 
-A hook is just a function
+A hook is just a function.
+
+But, Hooks aren't just for sharing functionality — they help separate concerns and make code more modular, readable, and maintainable.

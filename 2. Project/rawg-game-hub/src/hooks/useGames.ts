@@ -12,6 +12,7 @@ export interface Game {
   name: string;
   background_image: string;
   parent_platforms: { platform: Platform }[]; // Smelly Code -> Should be  "Platform[]"
+  metacritic: number;
 }
 
 interface FetchGameResponse {

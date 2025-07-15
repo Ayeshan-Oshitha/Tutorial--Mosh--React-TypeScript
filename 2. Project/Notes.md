@@ -15,3 +15,7 @@ Here we have two options:
 React calls setGames(in useGames.ts), which updates state.
 
 When state is updated in a component (or hook used by it), React triggers a re-render of that component (GameGrid) ( To see when react update states, see the react note in excalidraw )
+
+# Improving User Experience with Loading Skeltions
+
+To ensure there are no issues—especially in React Strict Mode—always set setLoading(false) in the correct places `inside the try and catch blocks` OR `then and catch block`, instead of relying on the `finally block`. This ensures that the loading state and skeletons behave correctly.

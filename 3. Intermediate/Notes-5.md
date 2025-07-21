@@ -23,3 +23,32 @@ So Redux is no longer needed for caching.
 ## Setting up the React Query
 
 queryClient is teh core object we used for managing and caching remote data in React Query.
+
+Note ( Important ) - In React Query, the queryFn does not accept resolved data. It **expects a function that returns a Promise, not the actual data itself**. ( But That **Promise should have the resolved response data** — not the full response object)
+
+( Note - Actually, React quety accepts the whole response object, But In components, we will have to write data.data, which is complex and noisy )
+
+```javascript
+const TodoList = () => {
+  const fetchTodos = () => {
+    return axios  // 2. returns a new promise with resolved data
+      .get<Todo[]>("https://jsonplaceholder.typicode.com/todos")
+      .then((res) => {
+        return res.data;  // 1. resolving the object and returning the data
+      });
+  };
+
+
+  const { data: todos, error } = useQuery<Todo[], Error>({
+    queryKey: ["todos"],
+    queryFn: fetchTodos,  // 3. A Promise with resolved data
+  });
+
+}
+```
+
+## Handling Errors
+
+React Query doesn't know the exact type of error when fetching data because it depends on how the data is fetched. For example, whether you use `fetch`, `axios`, or another library—each can return different types of error objects.
+
+If you're using Axios, the errors are usually instances of the `Error` interface, which is available in all browsers.

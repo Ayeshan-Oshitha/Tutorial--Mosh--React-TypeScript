@@ -54,7 +54,7 @@ React Query doesn't know the exact type of error when fetching data because it d
 
 If you're using Axios, the errors are usually instances of the `Error` interface, which is available in all browsers.
 
-# Using React Query Dev Tools
+## Using React Query Dev Tools
 
 Similar to many frontend libraries, React Query comes with its own dev tool. It is a powerful tool for debugging and monitoring queries.
 
@@ -63,3 +63,48 @@ The `<ReactQueryDevTools>` component should be added to the component tree **aft
 In the dev tools, the **number of observers** refers to how many components are currently using a particular query. If a component that uses a query is unmounted from the screen, the observer count for that query will decrease. When the **observer count reaches 0**, the query becomes **inactive**. Inactive queries will eventually be **garbage collected** and removed from the cache.
 
 By default, all queries have a **cache time of 5 minutes**.
+
+## Customizing Query Settings
+
+React Query comes with a few default settings, but we can always customize them either per query or globally.
+
+```javascript
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 3,
+      gcTime: 300_000, // 5 mins
+      staleTime: 10 * 1000, // 10 s
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+```
+
+- **Retry** – Retries the request if it fails.
+
+- **gcTime** – Previously known as cacheTime. This defines how long inactive data is kept in the cache before being garbage collected.
+
+- **staleTime** – This is the duration for which data is considered fresh. By default, staleTime is 0, which means data is treated as stale(old) immediately after it’s fetched. So, the next time we request the same data, React Query will fetch it again from the backend. However, if we set staleTime to 5 minutes, React Query will consider the data fresh for 5 minutes. During that time, if we request the same data, React Query will serve the previously fetched data without calling the backend again. (No request to the server is made during that time, unless **you manually refetch** or other **conditions override it** (Query key changes,Manual invalidateQueries() ).)
+
+React Query **automatically refreshes stale data under 3 situations**:
+
+- When the network is reconnected
+- When a component is mounted
+- When the window is refocused (e.g., when switching from another browser tab or desktop window to this tab)
+
+But we can control this behavior by setting the following options to `false`:
+
+- refetchOnWindowFocus
+- refetchOnReconnect
+- refetchOnMount
+
+---
+
+While React Query attempting to fetch the latest data from the backend. At the same time, it will immediately return the stale data from the cache to the component.
+
+<img src="./images/image-1.png" width="500">
+
+Once the updated data is received, React Query updates the cache and notifies the component that new data is available. The component then re-renders using the updated data.
+
+<img src="./images/image-2.png" width="500">

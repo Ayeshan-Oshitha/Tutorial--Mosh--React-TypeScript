@@ -120,3 +120,19 @@ When we add the `value(variable)` to **queryKey**, it refetches the data when th
 ---
 
 Here, we write the `queryKey` like we are implementing the route. When we want to get posts by a user, we apply it as `users/2(userId)/posts`. This is the same convention used in React Query. This is helpful when caching data and refreshing the `correct data` when necessary. (store correct data - correct posts for the correct user)
+
+## Paginated Queries
+
+We can use `queryKey` to create pagination. When the page changes, the `queryKey` changes and fetches the correct data.
+
+But another important thing is we can avoid flickering when fetching new data for that page. Normally, when we request data for a new page, the page reloads and jumps to the top, and we have to scroll back to the position again.
+
+But with the new option, we can avoid flickering to improve the user experience:
+
+```javascript
+placeholderData: (previousData) => previousData;
+
+// or
+
+placeholderData: keepPreviousData; // will be deprecated in the near future
+```

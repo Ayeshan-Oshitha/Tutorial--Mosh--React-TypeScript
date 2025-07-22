@@ -108,3 +108,15 @@ While React Query attempting to fetch the latest data from the backend. At the s
 Once the updated data is received, React Query updates the cache and notifies the component that new data is available. The component then re-renders using the updated data.
 
 <img src="./images/image-2.png" width="500">
+
+## Parameterized Queries
+
+```javascript
+queryKey: userId ? ["users", userId, "posts"] : ["posts"],
+```
+
+When we add the `value(variable)` to **queryKey**, it refetches the data when that parameter changes. It works like the dependency array in useEffect.
+
+---
+
+Here, we write the `queryKey` like we are implementing the route. When we want to get posts by a user, we apply it as `users/2(userId)/posts`. This is the same convention used in React Query. This is helpful when caching data and refreshing the `correct data` when necessary. (store correct data - correct posts for the correct user)

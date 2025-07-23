@@ -136,3 +136,9 @@ placeholderData: (previousData) => previousData;
 
 placeholderData: keepPreviousData; // will be deprecated in the near future
 ```
+
+## Infinite Queries
+
+Use below link
+
+https://dev.to/dravidjones28/how-to-implement-infinite-queries-in-react-query-22e6

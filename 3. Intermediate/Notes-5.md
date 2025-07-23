@@ -142,3 +142,34 @@ placeholderData: keepPreviousData; // will be deprecated in the near future
 Use below link
 
 https://dev.to/dravidjones28/how-to-implement-infinite-queries-in-react-query-22e6
+
+## Mutating Data
+
+For mutating data, we use the `useMutation` hook from React Query.
+
+When updating the list(UI) after we add(update/delete) a todo, we can use two methods:
+
+### 1. First Approach – Invalidating the Cache
+
+This way, React Query will refetch all the data from the backend.
+(This does not work with JSONPlaceholder, because the object we send to the fake API is not persistent.)
+
+```javascript
+const queryClient = useQueryClient();
+
+// APPROACH: Invalidating the cache
+queryClient.invalidateQueries({
+  queryKey: ["todos"],
+});
+```
+
+### 2. Another Approach – Updating the Data in Cache Directly
+
+Instead of refetching, we manually update the cache:
+
+```javascript
+queryClient.setQueryData<Todo[]>(["todos"], (todos) => [
+  savedTodo,
+  ...(todos || []),
+]);
+```

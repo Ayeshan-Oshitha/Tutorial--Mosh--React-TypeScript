@@ -188,3 +188,17 @@ Instead of the current pessimistic update approach (where we update the UI after
 However, in React Query, implementing optimistic updates is a bit more complex.
 
 The onMutate function runs before the mutation function is executed.
+
+## Understanding the Application layers
+
+<img src="./images/image-3.png">
+
+**APIClient** - Handles sending HTTP Requests to our backend.
+
+**HTTPServices**- Instances of API CLIENT, dedicated to working with specific types of objects ( For example, todo service for working with todos and post service for working with posts)
+
+**Custom Hook** (includes react query hooks) - use HTTP Services to fetch and update data
+
+**Components** - use the hooks to fetch and update data
+
+Each layer has single responsibility resulting in clean and well organized architecture.

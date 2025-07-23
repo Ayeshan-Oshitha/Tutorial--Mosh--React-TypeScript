@@ -149,6 +149,13 @@ For mutating data, we use the `useMutation` hook from React Query.
 
 When updating the list(UI) after we add(update/delete) a todo, we can use two methods:
 
+In the `onSuccess` method:
+
+- The **first argument** (`savedTodo`) is the **response received from the server**.
+- The **second argument** (`newTodo`) is the **data we sent to the server**.
+
+In **React Query**, you'll notice in **IntelliSense** that the word `variables` is often used — this refers to the **input** sent to the backend (i.e., the data passed into the mutation function).
+
 ### 1. First Approach – Invalidating the Cache
 
 This way, React Query will refetch all the data from the backend.
@@ -173,3 +180,11 @@ queryClient.setQueryData<Todo[]>(["todos"], (todos) => [
   ...(todos || []),
 ]);
 ```
+
+## Optimistic Updates
+
+Instead of the current pessimistic update approach (where we update the UI after receiving a response from the backend), we can use the optimistic update approach — update the UI first, and if there's an error, revert the changes.
+
+However, in React Query, implementing optimistic updates is a bit more complex.
+
+The onMutate function runs before the mutation function is executed.

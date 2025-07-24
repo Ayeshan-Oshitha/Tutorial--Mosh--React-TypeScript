@@ -1,13 +1,13 @@
 import React, { ReactNode, useReducer } from "react";
-import loginReducer from "./reducers/loginReducer";
-import AuthContext from "./contexts/authContext";
+import authReducer from "./authReducer";
+import AuthContext from "./authContext";
 
 interface Props {
   children: ReactNode;
 }
 
 const AuthProvider = ({ children }: Props) => {
-  const [user, dispatch] = useReducer(loginReducer, "");
+  const [user, dispatch] = useReducer(authReducer, "");
   return (
     <div>
       <AuthContext.Provider value={{ user: user, dispatch: dispatch }}>

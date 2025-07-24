@@ -141,3 +141,7 @@ Once we manage the server state with React Query:
 One of the benefits of a state management tool is that it gives us more control over state management and allows our **components to rerender only if a specific piece of data changes**.
 
 Example → Currently, our counter store has one state — `counter`. For demo purposes, let’s add another state — `max`. Now, our `Navbar` uses the `counterStore`. So by default, when **either** the `counter` or `max` changes in another component, the `Navbar` rerenders again. But by using a **selector**, we can tell the `Navbar` to rerender **only if** `counter` **changes**.
+
+## Inspecting Store with Zustand Dev Tools
+
+We can inspect our Zustand store through `React DevTools` by installing the `simple-zustand-devtools` package.

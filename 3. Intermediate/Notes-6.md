@@ -41,3 +41,7 @@ To share context using React Context, **there are 3 things we need to do**:
 3. Once we have the context, we **wrap our component tree using the Provider component** and provide the data we want to share.
 
 Extra – In the Provider, we set the value property. This value overrides the default value provided in createContext(Value inside brackets).
+
+## Debugging with React Dev Tools
+
+We can view the context details in the `Components tab` of the `React Developer Tools`.

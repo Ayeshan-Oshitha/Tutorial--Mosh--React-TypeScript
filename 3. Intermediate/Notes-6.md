@@ -135,3 +135,9 @@ Once we manage the server state with React Query:
 - And share it using Context
 - If our state management logic is complex, we can consolidate state logic using a reducer
 - If we still have unnecessary re-renders and need more control over data management, we can use a simple state management tool like **Zustand**
+
+## Preventing Unnecessary Rerenders with Selectors
+
+One of the benefits of a state management tool is that it gives us more control over state management and allows our **components to rerender only if a specific piece of data changes**.
+
+Example → Currently, our counter store has one state — `counter`. For demo purposes, let’s add another state — `max`. Now, our `Navbar` uses the `counterStore`. So by default, when **either** the `counter` or `max` changes in another component, the `Navbar` rerenders again. But by using a **selector**, we can tell the `Navbar` to rerender **only if** `counter` **changes**.

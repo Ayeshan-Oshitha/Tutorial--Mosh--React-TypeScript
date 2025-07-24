@@ -6,6 +6,7 @@ interface Props {
   children: ReactNode;
 }
 
+// Providing the data to context
 const AuthProvider = ({ children }: Props) => {
   const [user, dispatch] = useReducer(authReducer, "");
   return (

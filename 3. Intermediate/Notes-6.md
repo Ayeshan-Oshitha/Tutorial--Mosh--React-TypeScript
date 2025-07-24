@@ -45,3 +45,93 @@ Extra – In the Provider, we set the value property. This value overrides the d
 ## Debugging with React Dev Tools
 
 We can view the context details in the `Components tab` of the `React Developer Tools`.
+
+## Splitting Code for efficiency
+
+One important thing is: **anytime something in a context changes, all components that use that context will re-render**.
+
+So the Context should only hold tht valuesa that are closely reletaed and tecn to chgnage together
+
+<img src="./images/image-5.png" width="400">
+
+Currently, our `NavBar` depends on two contexts: `TasksContext` and `AuthContext`.
+
+And let’s think—in future we don’t need `TasksContext`. So now we just have to remove it from the `NavBar` component.
+
+With this, it will only re-render if the `AuthContext` (`currentUser`) changes.
+
+<img src="./images/image-6.png" width="300">
+
+However, **if earlier these two contexts had been part of one global context**, then even though we didn’t need `TasksContext`, our NavBar would still re-render when either `AuthContext` or `TasksContext` changed inside the global context.
+
+## When to Use Context
+
+<img src="./images/image-7.png" width="600">
+
+**Server state** is the data we fetch from the backend. We should **avoid using React Context** to share and store server state, because we’ll end up with too many contexts, each holding a certain type of object.
+
+(For example, in our game app project, we will have a deeply nested component tree.)
+
+<img src="./images/image-8.png" width="300">
+
+So, instead, we should let **React Query** manage the server state for us. React Query is designed especially for this purpose and gives us a lot of control over how data is stored and cached.
+
+**Client stat**e is the data that represents the state of the client or UI (examples include `currentUser`, selected theme, filters, and so on). For managing client state, we can either use **local state** (useState or useReducer) or **React Context** (for sharing state).
+
+As a best practice, **Context should have a single responsibility**. We should split them up when necessary to **minimize re-renders**.
+
+But if we have a situation where splitting context doesn’t make sense and we’re dealing with unnecessary re-renders, then we can use a **state management tool**.
+
+**State management tools** allow components to watch a specific piece of state and re-render only when that piece changes.
+
+### State Management Libraries:
+
+- Redux
+- MobX
+- Recoil
+- xState
+- Zustand
+
+All of these serve the same purpose, but they **differ in how they handle state and the features they provide**.
+
+## Context vs Redux
+
+Redux is a widely used state management library for JavaScript applications. It provides a centralized store to manage application state. So instead of storing local state in our components, we store all the state in a single global store and have each component access the piece of state that it needs. This way, we don't need to pass data through many components in the middle.
+
+So one of the benefits of using a state management tool is they allow us **to avoid prop drilling**.
+
+Context is **also used** to avoid prop drilling, but it is not a state management tool since it doesn't have a way to store and update data. When using context, we store the state somewhere else. So **Context is a way to transport** and share the state in our application.
+
+Comparing Context with Redux is like comparing a box with a truck carrying the box.
+
+So both React Context and Redux allow us to share state (share data) in our application.
+
+**But does Context replace Redux?**
+
+With Redux, we can:
+
+<img src="./images/image-9.png" width="400">
+
+As software developers, our goal should be to **solve problems of businesses and people**, not **just write code**.
+
+Redux allows us to undo things and log actions, But if that is not a requirement in the application we build, We’re just increasing the complexity by using the wrong tool to solve the problem.
+
+---
+
+Most React applications need a way to manage both **client and server state**. A few years ago, before we had tools like React Query and Zustand, people used Redux to store both the client and server state in a single global store.
+
+But Redux brings a **lot of unnecessary complexity**. When building applications with Redux, we have to deal with several concepts like:
+
+<img src="./images/image-10.png" width="400">
+
+These days, we can manage server state using **React Query**, So we don't have to deal with Redux’s unnecessary concepts. In React Query, we only deal with **Queries** and **Mutations**.
+
+**But what about client state?**
+
+Once we manage the server state with React Query:
+
+- There is very little most apps have in terms of client state (many apps don’t have much client state)
+- For simple applications, we can use local state in our components
+- And share it using Context
+- If our state management logic is complex, we can consolidate state logic using a reducer
+- If we still have unnecessary re-renders and need more control over data management, we can use a simple state management tool like **Zustand**

@@ -21,3 +21,47 @@ In summary, if you're starting a new project or want full access to modern routi
 - Instead, in react-router-dom, we can use the `<Link>` component, which only replaces the content **without a full page reload**.
 
 - Also, if we need to navigate **programmatically**, we can use the `useNavigate` hook.
+
+## Getting Data about the current Route
+
+When we need to access data related to the current route, we can use the following three hooks from `react-router-dom`:
+
+**1. `useParams()`**
+
+- This hook allows you to extract route parameters.
+- It returns an object containing key-value pairs based on the dynamic segments in your route.
+
+```javascript
+const params = useParams();
+console.log(params.id); // if the route is /users/:id
+```
+
+**2. `useSearchParams()`**
+
+- This hook allows you to read and update query parameters from the URL.
+
+```javascript
+// Example (for route /users/1?name=alice&age=25):
+
+const [searchParams, setSearchParams] = useSearchParams();
+console.log(searchParams.get("name")); // Outputs: "alice"
+```
+
+You can also use `setSearchParams()` to update the query parameters. However, like setState in React, it has **side effects** — so it should **only be used inside event handlers or useEffect, not during rendering**.
+
+**3. `useLocation()`**
+
+- This hook allows you to access the full location object of the current route.
+
+- It includes information like:
+
+  - pathname
+  - search (query string)
+  - hash
+  - state
+  - and more
+
+```javascript
+const location = useLocation();
+console.log(location.pathname); // e.g., "/users/1"
+```

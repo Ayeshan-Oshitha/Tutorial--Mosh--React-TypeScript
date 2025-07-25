@@ -65,3 +65,9 @@ You can also use `setSearchParams()` to update the query parameters. However, li
 const location = useLocation();
 console.log(location.pathname); // e.g., "/users/1"
 ```
+
+## Nested Routes
+
+`<Outlet>` is a **placeholder** for rendering child route components.
+
+At runtime, depending on the user's current URL (location), the matching child component will be rendered inside the `<Outlet>`.

@@ -116,3 +116,17 @@ const UsersPage = () => {
 But the above approach is **not scalable**, especially when we have many protected pages.
 
 To solve this, we can use **layout routes** to handle authentication in a centralized and reusable way.
+
+## Layout Routes
+
+To protect routes, we can use two ways:
+
+**1. Mosh’s way (Outlet way):**
+
+- This uses a layout component with `<Outlet />` to protect many routes at once.
+- It’s good for protecting groups of routes, but sometimes the routes file can feel confusing.
+
+**2. My way (Children way):**
+
+- This wraps each protected component individually with `<PrivateRoute>{children}</PrivateRoute>`.
+- It’s good for protecting each component separately and gives more fine-grained control.

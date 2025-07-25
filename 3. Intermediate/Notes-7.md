@@ -77,3 +77,11 @@ At runtime, depending on the user's current URL (location), the matching child c
 If we want to **highlight the currently selected link**, we can replace the `Link` component with `NavLink`.
 
 `NavLink` works exactly the same as `Link`, but with one key difference: it allows us to** apply styling or classes when the link is active**.
+
+## Handling Errors
+
+To handle errors, we can use an **error page**. To catch the error, we can use a hook called `useRouteError`.
+
+In real-world applications, we should **log the error** using some service like **Sentry**. In development, we can simply **log it in the console**.
+
+We can **differentiate the errors** between **invalid routes** and **errors thrown inside the application**.

@@ -85,3 +85,34 @@ To handle errors, we can use an **error page**. To catch the error, we can use a
 In real-world applications, we should **log the error** using some service like **Sentry**. In development, we can simply **log it in the console**.
 
 We can **differentiate the errors** between **invalid routes** and **errors thrown inside the application**.
+
+## Private Routes
+
+When implementing private routes, we can use the `navigate` hook. However, it has a **side effect** — meaning **we can't call it during the render phase**. We can only call it inside an **event handler** or **inside a** `useEffect`.
+
+So instead, we should use the `<Navigate />` component.
+
+```javascript
+const UsersPage = () => {
+  const { user } = useAuth();
+
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
+
+  return (
+    <div className="row">
+      <div className="col">
+        <UserList />
+      </div>
+      <div className="col">
+        <Outlet />
+      </div>
+    </div>
+  );
+};
+```
+
+But the above approach is **not scalable**, especially when we have many protected pages.
+
+To solve this, we can use **layout routes** to handle authentication in a centralized and reusable way.

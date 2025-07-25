@@ -71,3 +71,9 @@ console.log(location.pathname); // e.g., "/users/1"
 `<Outlet>` is a **placeholder** for rendering child route components.
 
 At runtime, depending on the user's current URL (location), the matching child component will be rendered inside the `<Outlet>`.
+
+## Styling the Active Link
+
+If we want to **highlight the currently selected link**, we can replace the `Link` component with `NavLink`.
+
+`NavLink` works exactly the same as `Link`, but with one key difference: it allows us to** apply styling or classes when the link is active**.
